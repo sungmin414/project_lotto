@@ -15,14 +15,12 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
-from lotto import views
+from django.urls import path, include
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('lotto/', views.index, name='lotto'),
-    path('', views.index, name='index'),
-    path('lotto/new/', views.post, name='new_lotto'),
-    path('lotto/<int:lottokey>/detail/', views.detail, name='detail')
+    path('lotto/', include('lotto.urls')),
+    path('polls/', include('polls.urls')),
 ]

@@ -18,7 +18,7 @@ def post(request):
         if form.is_valid():
             lotto = form.save(commit=False)
             lotto.generate()
-            return redirect('index')
+            return redirect('lotto')
     else:
         form = PostForm()
         return render(request, 'lotto/form.html', {'form':form})
