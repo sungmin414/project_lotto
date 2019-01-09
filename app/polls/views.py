@@ -1,5 +1,5 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse, Http404
+from django.shortcuts import render, get_object_or_404
 
 from .models import Question
 
@@ -20,4 +20,10 @@ def vote(request, question_id):
 
 
 def detail(request, question_id):
-    return HttpResponse("You're looking at question %s." % question_id)
+    # try:
+        # q = Question.objects.get(pk = question_id)
+        q = get_object_or_404(Question, pk = question_id)
+        context = {'question': q}
+    # except Question.DoesNotExist:
+    #     raise Http404('Question %s does not exist' % question_id)
+        return render(request, 'polls/detail.html', context)

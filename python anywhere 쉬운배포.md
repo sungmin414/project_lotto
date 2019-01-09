@@ -56,3 +56,15 @@ DEBUG=False
 ALLOWED_HOST=[honux.pythonanywhere.com]
 SECRET_KEY= '....'
 ```
+
+## 404오류 처리방법(2가지 다른방법도 더있음 문서 참조)
+
+    
+    def detail(request, question_id):
+        # try:
+            # q = Question.objects.get(pk = question_id)
+            q = get_object_or_404(Question, pk = question_id)
+            context = {'question': q}
+        # except Question.DoesNotExist:
+        #     raise Http404('Question %s does not exist' % question_id)
+            return render(request, 'polls/detail.html', context)
