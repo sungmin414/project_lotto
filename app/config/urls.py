@@ -24,5 +24,8 @@ urlpatterns = [
     path('polls/', include('polls.urls')),
     path('kilogram/', include('kilogram.urls')),
     path('', kilogram_views.IndexView.as_view(), name='root'),
+    # 장고로그인 기능(만들어져있는거)
     path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/signup/', kilogram_views.CreateUserView.as_view(), name='signup'),
+    path('accounts/signup/done/', kilogram_views.RegisteredView.as_view(), name='create_user_done'),
 ]
