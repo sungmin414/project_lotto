@@ -13,7 +13,7 @@
 
 <form action="{% url 'login' %}" method="POST">
     {% csrf_token %}
-    <input type="hidden" name="next" value="">
+    <input type="hidden" name="next" value="{{next}}">
     {{ form.as_p }}
     <button type="submit">로그인</button>
 </form>
