@@ -1,5 +1,6 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render, get_object_or_404, redirect
+from django.utils import timezone
 from django.views import generic
 
 from .models import Question
@@ -10,7 +11,9 @@ class IndexView(generic.ListView):
     context_object_name = 'latest_question_list'
 
     def get_queryset(self):
-        return Question.objects.order_by('-pub_date')[:5]
+        return Question.objects.filter(
+            pub_date__lte=timezone.now()
+        ).order_by('-pub_date')[:5]
 #
 # def index(request):
 #     latest_question_list = Question.objects.order_by('-pub_date')[0:5]
