@@ -16,11 +16,12 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-
-
+from kilogram import views as kilogram_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('lotto/', include('lotto.urls')),
     path('polls/', include('polls.urls')),
+    path('kilogram/', include('kilogram.urls')),
+    path('', kilogram_views.IndexView.as_view(), name='root'),
 ]
