@@ -1,4 +1,4 @@
-## python anywhere 쉬운배포
+## 내용정리
 
 
 ### pythonanywhere 회원가입
@@ -68,3 +68,6 @@ SECRET_KEY= '....'
         # except Question.DoesNotExist:
         #     raise Http404('Question %s does not exist' % question_id)
             return render(request, 'polls/detail.html', context)
+
+
+

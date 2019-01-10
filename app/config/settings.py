@@ -126,3 +126,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Auth settings
+LOGIN_REDIRECT_URL = '/kilogram/'

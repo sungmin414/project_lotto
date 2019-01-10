@@ -24,4 +24,5 @@ urlpatterns = [
     path('polls/', include('polls.urls')),
     path('kilogram/', include('kilogram.urls')),
     path('', kilogram_views.IndexView.as_view(), name='root'),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
