@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 from django.urls import path, include
 from kilogram import views as kilogram_views
 
@@ -24,11 +25,13 @@ urlpatterns = [
     path('lotto/', include('lotto.urls')),
     path('polls/', include('polls.urls')),
     path('kilogram/', include('kilogram.urls')),
-    path('', kilogram_views.IndexView.as_view(), name='root'),
+    path('', login_required(kilogram_views.IndexView.as_view()), name='root'),
     # 장고로그인 기능(만들어져있는거)
-    path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/signup/', kilogram_views.CreateUserView.as_view(), name='signup'),
-    path('accounts/signup/done/', kilogram_views.RegisteredView.as_view(), name='create_user_done'),
+    # path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('allauth.urls')),
+    # path('accounts/signup/', kilogram_views.CreateUserView.as_view(), name='signup'),
+    # path('accounts/signup/done/', kilogram_views.RegisteredView.as_view(), name='create_user_done'),
+
 
 ]
 

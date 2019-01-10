@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.urls import path
 
 from . import views
@@ -5,6 +6,7 @@ from . import views
 app_name = 'kilogram'
 
 urlpatterns = [
-    path('', views.IndexView.as_view(), name='index'),
-    path('upload/', views.upload, name='upload')
+    path('', login_required(views.IndexView.as_view()), name='index'),
+    path('upload/', views.upload, name='upload'),
+
 ]

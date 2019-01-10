@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
+from django.views.generic import ListView
 from django.views.generic.base import TemplateView
 # 오브젝트를 생성하는 뷰 , 폼하고 모델하고 연결해서 새로운 데이터를 넣을때 사용
 from django.views.generic.edit import CreateView
@@ -23,8 +24,15 @@ def upload(request):
     return render(request, 'kilogram/upload.html', {'form': form})
 
 
-class IndexView(TemplateView):
-    template_name = 'kilogram/index.html'
+class IndexView(ListView):
+    # model = Photo
+    context_object_name = 'user_photo_list'
+    # 사진 2개씩 나오게하기
+    paginate_by = 2
+
+    def get_queryset(self):
+        user = self.request.user
+        return user.photo_set.all().order_by('-pub_date')
 
 
 class CreateUserView(CreateView):
