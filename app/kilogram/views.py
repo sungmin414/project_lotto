@@ -1,7 +1,8 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.views.generic.base import TemplateView
 # 오브젝트를 생성하는 뷰 , 폼하고 모델하고 연결해서 새로운 데이터를 넣을때 사용
 from django.views.generic.edit import CreateView
@@ -34,14 +35,20 @@ class IndexView(ListView):
         user = self.request.user
         return user.photo_set.all().order_by('-pub_date')
 
+#
+# class CreateUserView(CreateView):
+#     template_name = 'registration/signup.html'
+#     form_class = CreateUserForm
+#     # form_class = UserCreationForm
+#     # reverse_lazy 재내릭뷰같은경우 로딩하는 문제때문에
+#     success_url = reverse_lazy('create_user_done')
+#
+#
+# class RegisteredView(TemplateView):
+#     template_name = 'registration/signup_done.html'
 
-class CreateUserView(CreateView):
-    template_name = 'registration/signup.html'
-    form_class = CreateUserForm
-    # form_class = UserCreationForm
-    # reverse_lazy 재내릭뷰같은경우 로딩하는 문제때문에
-    success_url = reverse_lazy('create_user_done')
 
-
-class RegisteredView(TemplateView):
-    template_name = 'registration/signup_done.html'
+class ProfileView(DetailView):
+    context_object_name = 'profile_user'
+    model = User
+    template_name = 'kilogram/profile.html'

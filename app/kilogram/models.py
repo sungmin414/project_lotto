@@ -21,3 +21,10 @@ class Photo(models.Model):
     thumnail_image = models.ImageField(blank=True)
     comment  = models.CharField(max_length=255)
     pub_date = models.DateTimeField(auto_now_add=True)
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=True)
+    profile_photo = models.ImageField(blank=True)
+    nickname = models.CharField(max_length=64)
+
