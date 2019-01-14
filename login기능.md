@@ -136,6 +136,6 @@ LOGIN_REDIRECT_URL = '/kilogram/'
 
 ```
 
-## 참고 링크
+## 참고 링크. 
 - https://docs.djangoproject.com/en/1.10/ref/urlresolvers/
 - https://docs.djangoproject.com/en/1.10/topics/auth/default/
