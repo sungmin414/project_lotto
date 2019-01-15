@@ -1,0 +1,17 @@
+{% extends 'account/base.html' %}
+
+{% block content %}
+<h1>{{user.username}} Profile Update</h1>
+    {% if error_msg %}
+    <div class="alert alert-wqrning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span>Error</span>{{error_msg}}</button>
+    </div>
+    {% endif %}
+
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{user_form.as_p}}
+    {{profile_form.as_p}}
+    <input type="submit" value="Update">
+</form>
+{% endblock %}

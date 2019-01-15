@@ -29,16 +29,16 @@ class UploadForm(forms.ModelForm):
 
 
 class UserForm(forms.ModelForm):
-    class MEta:
+    class Meta:
         model = User
         fields = ['first_name', 'last_name']
 
 
 class ProfileForm(forms.ModelForm):
-    profile_photo = forms.ImageField(requeired=False)
+    profile_photo = forms.ImageField(required=False)
 
     class Meta:
         model = Profile
-        fields = ['nicname', 'profile_photo']
+        fields = ['nickname', 'profile_photo']
 
 
