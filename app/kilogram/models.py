@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from sorl.thumbnail import ImageField
 
 # Create your models here.\
 from django.shortcuts import get_object_or_404, render
@@ -20,9 +21,13 @@ def user_path(instance, filename):
 class Photo(models.Model):
     image = models.ImageField(upload_to=user_path)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=True)
-    thumnail_image = models.ImageField(blank=True)
+    # thumnail_image = models.ImageField(blank=True)
     comment  = models.CharField(max_length=255)
     pub_date = models.DateTimeField(auto_now_add=True)
+    is_public = models.BooleanField(default=False)
+
+    def __str__(self):
+        return '{}{}{}'.format(self.owner.username, self.comment, self.is_public)
 
 
 class Profile(models.Model):

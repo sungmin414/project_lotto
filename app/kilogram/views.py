@@ -47,11 +47,18 @@ class IndexView(ListView):
 # class RegisteredView(TemplateView):
 #     template_name = 'registration/signup_done.html'
 
+@login_required
+def profile(request, pk):
+    user = get_object_or_404(User, pk=pk)
+    photos = user.photo_set.filter(is_public=True)[:20]
+    context = {'profile_user': user, 'photos': photos}
+    return render(request, 'kilogram/profile.html', context)
 
-class ProfileView(DetailView):
-    context_object_name = 'profile_user'
-    model = User
-    template_name = 'kilogram/profile.html'
+#
+# class ProfileView(DetailView):
+#     context_object_name = 'profile_user'
+#     model = User
+#     template_name = 'kilogram/profile.html'
 
 
 class ProfileUpdateView(View):
