@@ -7,12 +7,15 @@ from django.shortcuts import get_object_or_404, render
 from django.views import View
 
 
+# instance(photo), filename(업로된 파일이름)가르킴
 def user_path(instance, filename):
     from random import choice
     import string
 
+    # 무작위 8글자를 뽑아줌
     arr = [choice(string.ascii_letters) for _ in range(8)]
     pid = ''.join(arr)
+    # 파일확장자
     extension = filename.split('.')[-1]
     # honux/absdfer.png
     return '%s/%s.%s' % (instance.owner.username, pid, extension)
